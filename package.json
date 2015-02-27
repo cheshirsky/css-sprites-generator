@@ -1,0 +1,43 @@
+{
+  "name": "css-sprites",
+  "description": "Tiny css sprites generator based on inline sprites definition and references.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cheshirsky/css-sprites",
+  "author": "Cheshirsky",
+  "files": [
+    "tasks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cheshirsky/css-sprites.git"
+   },
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "spritesmith":"~1.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-run-sequence": "^0.3.2",
+    "gulp-webpack": "^1.2.0",
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.5",
+    "gulp-jshint": "~1.9.0",
+    "jshint-stylish": "~1.0.1"
+  },
+  "keywords": [
+    "css",
+    "sprites"
+  ],
+  "bugs": {
+    "url": "https://github.com/cheshirsky/css-sprites/issues"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
+  "license": "MIT"
+}
