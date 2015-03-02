@@ -1,22 +1,19 @@
 var gulp = require('gulp');
-var karma = require('karma').server;
-var runSequence = require('gulp-run-sequence');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
+var jasmine = require('gulp-jasmine');
+var runSequence = require('gulp-run-sequence');
 
-gulp.task('default', ['lint', 'test']);
+gulp.task('default', function (callback) {
+	runSequence('lint', 'test' );
+});
 
 gulp.task('lint', function() {
-  return gulp.src(['./lib/*.js', './tasks/*.js', './tests/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
+	gulp.src(['lib/*.js', 'tasks/*.js', 'tests/*.js'])
+		.pipe(jshint())
+		.pipe(jshint.reporter(stylish));
 });
 
 gulp.task('test', function () {
-    return gulp.src('tests/*.js')
-        .pipe(jasmine({
-            reporter: new reporters.JUnitXmlReporter()
-        }));
+	gulp.src('tests/suites/*.js').pipe(jasmine());
 });
-
-gulp.task('test', function (done) {});
