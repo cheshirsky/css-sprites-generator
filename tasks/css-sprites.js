@@ -9,12 +9,13 @@ var Utils = require('../lib/utils');
 module.exports = function(grunt) {
 	'use strict';
 
-	grunt.file.defaultEncoding = 'utf8';
 	var files = [];
 	var defaultOptions = {
-		'out': './sprites',
-		'imagesBase': './',
-		'algorithm': 'top-down'
+		'styleSrc': './css',
+		'stylesDest': 'sprites-css',
+		'imagesSrc': './img',
+		'algorithm': 'top-down',
+		'imagesDest': 'sprites'
 	};
 
 	var collectDefinitions = function(files) {
@@ -46,14 +47,14 @@ module.exports = function(grunt) {
 				return true;
 			}
 			sprites[name].files = Utils.removeDuplicates(sprites[name].files);
-			normalizeImagesPath(sprites[name].images, options.imagesBase);
-			sprites[name].spriteImage = path.join('./', sprites[name].spriteImage);
+			normalizeImagesPath(sprites[name].images, options.imagesSrc);
+			sprites[name].spritePath = path.join(options.imagesDest, sprites[name].spriteImage);
 			tasks.push(function(next) {
 				SpriteGenerator.createSprite(options, sprites[name], function(err, result) {
 					if (err) {
 						grunt.log.errorlns(err + " [" + name + "]\r\n");
 					} else {
-						replaceSpriteReference(result);
+						replaceSpriteReference(options, result);
 					}
 					next();
 				});
@@ -95,10 +96,10 @@ module.exports = function(grunt) {
 		});
 	};
 
-	var replaceSpriteReference = function(spriteObj) {
+	var replaceSpriteReference = function(options, spriteObj) {
 		spriteObj.files.forEach(function(file) {
 			var processedCssFile = Parser.processCssFile(getFileByPath(file), spriteObj.css);
-			Utils.writeFileSync(processedCssFile.path, processedCssFile.data);
+			Utils.writeFileSync(processedCssFile.path.replace(options.stylesSrc, options.stylesDest), processedCssFile.data);
 		});
 	};
 
