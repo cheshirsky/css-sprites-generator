@@ -5,7 +5,8 @@
   "homepage": "https://github.com/cheshirsky/css-sprites",
   "author": "Cheshirsky",
   "files": [
-    "tasks"
+    "tasks",
+    "lib"
   ],
   "repository": {
     "type": "git",
