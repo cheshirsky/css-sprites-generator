@@ -1,7 +1,7 @@
 {
   "name": "css-sprites",
   "description": "Tiny css sprites generator based on inline sprites definition and references.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/cheshirsky/css-sprites",
   "author": "Cheshirsky",
   "files": [
