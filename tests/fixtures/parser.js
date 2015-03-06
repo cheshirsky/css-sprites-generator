@@ -4,13 +4,13 @@
 		"expected": {
 			"some-sprite0": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite0",
 				"spriteImage": "/res/dir/image0.png"
 			},
 			"some-sprite1": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite1",
 				"spriteImage": "/res/dir/image1.png"
 			}  
@@ -20,7 +20,7 @@
 		"expected": {
 			"some-sprite2": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite2",
 				"spriteImage": "/res/dir/image2.png"
 			} 
@@ -30,7 +30,7 @@
 		"expected": {
 			"some-sprite3": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite3",
 				"spriteImage": "/res/dir/image3.png"
 			} 
@@ -40,7 +40,7 @@
 		"expected": {
 			"some-sprite4@2x": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite4@2x",
 				"spriteImage": "/res/dir/image4@2x.png",
 				"spriteScale": "2"
@@ -51,7 +51,7 @@
 		"expected": {
 			"some-sprite5@2x": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite5@2x"
 			} 
 		}
@@ -60,7 +60,7 @@
 		"expected": {
 			"some-sprite6@2x": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite6@2x",
 				"spriteImage": "/res/dir/image6@2x.png"
 			} 
@@ -70,7 +70,7 @@
 		"expected": {
 			"some-sprite7@2x": {
 				"files": [],
-				"images": [],
+				"images": {},
 				"sprite": "some-sprite7@2x",
 				"spriteImage": "/res/dir/image7@2x.png"
 			} 
