@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 	function collectReferences(definitions, files) {
 		var refs = {};
 		files.forEach(function(file) {
-			Utils.extend(true, refs, Parser.extractReferences(definitions, file));
+			Utils.extend(true, refs, Parser.extractReferenses(definitions, file));
 		});
 		return refs;
 	}

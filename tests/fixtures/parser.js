@@ -75,5 +75,68 @@
 				"spriteImage": "/res/dir/image7@2x.png"
 			} 
 		}
+	}, {
+		"input": "/** sprite: some-sprite8@2x; sprite-image: url('/res/dir/image8@2x.png'); sprite-algorithm: binary-tree; sprite-alignment: center; */",
+		"expected": {
+			"some-sprite8@2x": {
+				"files": [],
+				"images": {},
+				"sprite": "some-sprite8@2x",
+				"spriteImage": "/res/dir/image8@2x.png",
+				"spriteAlgorithm": "binary-tree",
+				"spriteAlignment": "center"
+			}
+		}
+	}],
+	"extractReferenses": [{
+		"input": {
+			"path": "path/to/fake.css",
+			"data": "/** sprite-ref: someSprite9@2x */\r\n/** sprite-ref: someSprite10@2x */"
+		},
+		"expected": {}
+	}, {
+		"input": {
+			"path": "path/to/fake.css",
+			"data": "background-image: url(\"/some/fake/path.png\"); /** sprite-ref: someSprite11@2x */\r\n   background-image: url(/some/other/stub.png); /** sprite-ref: someSprite11@2x */"
+		},
+		"defs": {
+			"someSprite11@2x": {
+				"files": [],
+				"images": {},
+				"sprite": "some-sprite11@2x",
+				"spriteImage": "/res/dir/image11@2x.png",
+				"spriteScale": "2"
+			}
+		},
+		"expected": {
+			"someSprite11@2x": {
+				"files": [ "path/to/fake.css", "path/to/fake.css" ],
+				"images": { "/some/fake/path.png": [], "/some/other/stub.png": [] },
+				"sprite": "some-sprite11@2x",
+				"spriteImage": "/res/dir/image11@2x.png",
+				"spriteScale": "2"
+			}
+		}
+	}],
+	"extractURL": [{
+		"input": "background-image: url('fake/path/to/image.png');",
+		"expected": "fake/path/to/image.png",
+		"isUrl": true
+	}, {
+		"input": "background-image: url( ' fake/path/to/image2.png ' ); /* some comment */",
+		"expected": "fake/path/to/image2.png",
+		"isUrl": true
+	}, {
+		"input": "background-image: url(fake/path/to/image3.png);",
+		"expected": "fake/path/to/image3.png",
+		"isUrl": true
+	}, {
+		"input": "background-image: url(   fake/path/to/image4.png );",
+		"expected": "fake/path/to/image4.png",
+		"isUrl": true
+	}, {
+		"input": "background-image: url(  \"fake/path/to/image5.png\"  );",
+		"expected": "fake/path/to/image5.png",
+		"isUrl": true
 	}]
 }
