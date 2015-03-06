@@ -1,6 +1,3 @@
-//TODO: check for situation referenced sprite not found
-//TODO: normalize options
-
 var path = require('path');
 var Parser = require('../lib/parse-helpers');
 var SpriteGenerator = require('../lib/sprite-generator');
@@ -18,23 +15,73 @@ module.exports = function(grunt) {
 		'imagesDest': 'sprites'
 	};
 
-	var collectDefinitions = function(files) {
+	function collectDefinitions(files) {
 		var definitions = {};
 		files.forEach(function(file) {
 			Utils.extend(true, definitions, Parser.extractDefinitions(file.data));
 		});
 		return definitions;
-	};
+	}
 
-	var collectReferences = function(definitions, files) {
+	function collectReferences(definitions, files) {
 		var refs = {};
 		files.forEach(function(file) {
 			Utils.extend(true, refs, Parser.extractReferences(definitions, file));
 		});
 		return refs;
-	};
+	}
 
-	var cretateSprites = function(sprites, options, done) {
+	function createSpritesMap() {
+		var definitions = collectDefinitions(files);
+		return collectReferences(definitions, files);
+	}
+
+	function generateSprites(sprites, tasks, done) {
+		Utils.sequentialCall(tasks, function() {
+			grunt.log.ok(Object.keys(sprites).length, 'sprites were created');
+			done();
+		});
+	}
+
+	function getFileByPath(filePath) {
+		var result;
+		if (!files || !files.length || !filePath || !filePath.length) {
+			return;
+		}
+		files.forEach(function(file) {
+			if (filePath === file.path) {
+				result = file;
+				return false;
+			}
+		});
+		return result;
+	}
+
+	function replaceSpriteReference(options, spriteObj) {
+		spriteObj.files.forEach(function(file) {
+			var processedCssFile = Parser.processCssFile(getFileByPath(file), spriteObj.css);
+			Utils.writeFileSync(
+				processedCssFile.path.replace(options.stylesSrc, options.stylesDest),
+				processedCssFile.data
+			);
+		});
+	}
+
+	function spritesDebugInfo(sprites) {
+		grunt.log.debug("Sprites data:");
+		grunt.log.debug(JSON.stringify(sprites, null, 2));
+	}
+
+	function validateSpriteObject(sprite, name) {
+		if (!sprite.files || !sprite.files.length) {
+			return "Empty sprite: " + name;
+		} else if (!sprite.spriteImage) {
+			return "No refered image at sprite: " + name;
+		}
+		return;
+	}
+
+	function cretateSprites(sprites, options, done) {
 		if (typeof sprites !== 'object') {
 			grunt.log.errorlns("Incorrect sprites data.");
 			return;
@@ -47,7 +94,6 @@ module.exports = function(grunt) {
 				return true;
 			}
 			sprites[name].files = Utils.removeDuplicates(sprites[name].files);
-			normalizeImagesPath(sprites[name].images, options.imagesSrc);
 			sprites[name].spritePath = path.join(options.imagesDest, sprites[name].spriteImage);
 			tasks.push(function(next) {
 				SpriteGenerator.createSprite(options, sprites[name], function(err, result) {
@@ -62,60 +108,7 @@ module.exports = function(grunt) {
 		});
 		spritesDebugInfo(sprites);
 		generateSprites(sprites, tasks, done);
-	};
-
-	var createSpritesMap = function() {
-		var definitions = collectDefinitions(files);
-		return collectReferences(definitions, files);
-	};
-
-	var generateSprites = function(sprites, tasks, done) {
-		Utils.sequentialCall(tasks, function() {
-			grunt.log.ok(Object.keys(sprites).length, 'sprites were created');
-			done();
-		});
-	};
-
-	var getFileByPath = function(filePath) {
-		var result;
-		if (!files || !files.length || !filePath || !filePath.length) {
-			return;
-		}
-		files.forEach(function(file) {
-			if (filePath === file.path) {
-				result = file;
-				return false;
-			}
-		});
-		return result;
-	};
-
-	var normalizeImagesPath = function(data, basePath) {
-		data.map(function(image, index, images) {
-			images[index] = path.join(basePath, image);
-		});
-	};
-
-	var replaceSpriteReference = function(options, spriteObj) {
-		spriteObj.files.forEach(function(file) {
-			var processedCssFile = Parser.processCssFile(getFileByPath(file), spriteObj.css);
-			Utils.writeFileSync(processedCssFile.path.replace(options.stylesSrc, options.stylesDest), processedCssFile.data);
-		});
-	};
-
-	var spritesDebugInfo = function(sprites) {
-		grunt.log.debug("Sprites data:");
-		grunt.log.debug(JSON.stringify(sprites, null, 2));
-	};
-
-	var validateSpriteObject = function(sprite, name) {
-		if (!sprite.files || !sprite.files.length) {
-			return "Empty sprite: " + name;
-		} else if (!sprite.spriteImage) {
-			return "No refered image at sprite: " + name;
-		}
-		return;
-	};
+	}
 
 	grunt.registerMultiTask('cssSprites', 'generates images sprites', function() {
 		var done = this.async();
