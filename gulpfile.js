@@ -2,10 +2,13 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var jasmine = require('gulp-jasmine');
-var runSequence = require('gulp-run-sequence');
+var runSequence = require('run-sequence');
 
 gulp.task('default', function (callback) {
-	runSequence('lint', 'test' );
+	runSequence(
+        'lint',
+        'test'
+    );
 });
 
 gulp.task('lint', function() {

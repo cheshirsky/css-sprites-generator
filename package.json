@@ -11,21 +11,21 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/cheshirsky/css-sprites.git"
-   },
+  },
   "main": "index.js",
   "engines": {
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "spritesmith":"~1.2.0"
+    "spritesmith": "~1.2.0"
   },
   "devDependencies": {
     "gulp": "^3.8.10",
-    "gulp-watch": "~4.0.0",
-    "gulp-run-sequence": "^0.3.2",
+    "gulp-jasmine": "~2.0.0",
     "gulp-jshint": "~1.9.0",
+    "gulp-watch": "~4.0.0",
     "jshint-stylish": "~1.0.1",
-    "gulp-jasmine":"~2.0.0"
+    "run-sequence": "^1.1.4"
   },
   "keywords": [
     "css",
