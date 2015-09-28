@@ -21,21 +21,21 @@ JasmineHelpers.createDescription({
 			});
 		},
 
-		'extractReferenses': function(fixtures) {
-			expect(Parser.extractReferenses).toBeDefined();
-			expect(Parser.extractReferenses(null, null)).toBeNull();
+		'extractReferences': function(fixtures) {
+			expect(Parser.extractReferences).toBeDefined();
+			expect(Parser.extractReferences(null, null)).toBeNull();
 			// checking empty definition
 			var error;
 			var emptyFixture = fixtures.shift();
 			try {
-				Parser.extractReferenses({}, emptyFixture.input);
+				Parser.extractReferences({}, emptyFixture.input);
 			} catch(e) {
 				error = e;
 			}
 			expect(error).toBeDefined();
 			// checking regular refs
 			fixtures.forEach(function(fixture) {
-				expect(Parser.extractReferenses(fixture.defs, fixture.input)).toEqual(fixture.expected);
+				expect(Parser.extractReferences(fixture.defs, fixture.input)).toEqual(fixture.expected);
 			});
 		},
 

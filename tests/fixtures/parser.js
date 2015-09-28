@@ -88,7 +88,7 @@
 			}
 		}
 	}],
-	"extractReferenses": [{
+	"extractReferences": [{
 		"input": {
 			"path": "path/to/fake.css",
 			"data": "/** sprite-ref: someSprite9@2x */\r\n/** sprite-ref: someSprite10@2x */"

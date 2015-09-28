@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 			});
 			var map = cssSprites.createSpritesMap(files);
 			spritesDebugInfo(map);
-			cssSprites.cretateFromMap(map, function(err) {
+			cssSprites.createFromMap(map, function(err) {
 				grunt.log.debug(err);
 			});
 		});
