@@ -10,3 +10,4 @@ node_modules
 
 # Build folder for assets
 /build
+/tests/**/build
