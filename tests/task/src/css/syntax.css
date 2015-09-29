@@ -1,0 +1,19 @@
+/** sprite: test; sprite-image: url('/tests/task/build/img/${md5}.png'); */
+
+.element-sprite-1 {
+	width: 100px; height: 100px;
+	background-image: url('/tests/task/src/img/1.png'); /** sprite-ref: test; */
+	}
+
+.element-no-sprite-1 { width: 100px; height: 200px; background-image: url('/tests/task/src/img/1.png');}
+
+.element-sprite-2 {
+	width: 200px;
+	height: 100px;
+	background-image: url('/tests/task/src/img/2.png'); /** sprite-ref: test; */
+	}
+
+.element-no-sprite-2 {
+	width: 100px;
+	height: 200px;
+	background-image: url('/tests/task/src/img/2.png');}
