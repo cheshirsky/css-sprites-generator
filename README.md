@@ -1,4 +1,4 @@
-> CSS sprites generator v 0.1.4 (beta)
+> CSS sprites generator v 0.1.5 (beta)
 
 Tiny css sprites generator based on inline sprites definition and references. Images processing is based on [spritesmith](https://github.com/Ensighten/spritesmith).
 
